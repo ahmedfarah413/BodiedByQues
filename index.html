@@ -13,12 +13,12 @@
       href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&family=Josefin+Slab:ital,wght@0,400;0,600;1,300;1,400;1,600&family=Muli:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
       rel="stylesheet"
     />
-<scripttype="text/javascript"src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-<scripttype="text/javascript">
+<script type="text/javascript"src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+<!-- <script type="text/javascript">
 (function() {
 emailjs.init("user_4ybz5wGwQMUNKiQrTGmj6");
 })();
-</script>
+</script> -->
 
 
   </head>
@@ -66,6 +66,9 @@ emailjs.init("user_4ybz5wGwQMUNKiQrTGmj6");
           </li>
           <li class="menu-item">
             <a href="#bookSession" class="menu-link" data-content="Book a Session">Book a Session</a>
+          </li>
+          <li class="menu-item">
+            <a href="#rateSession" class="menu-link" data-content="Rate Us">Rate Us</a>
           </li>
         </ul>
         <div class="social-media">
@@ -252,6 +255,40 @@ emailjs.init("user_4ybz5wGwQMUNKiQrTGmj6");
         </div>
       </section>
 
+      <section class="contact" id="rateSession">
+        <div class="contact-wrapper">
+          <div class="contact-left"></div>
+          <div class="contact-right">
+            <h1 class="contact-heading">Rate Us</h1>
+             <!-- <form action="mailto:bodiedbyques@gmail.com" method="post" enctype="text/plain"> -->
+              <form name="form" id="frmRateUs" method="post" enctype="multipart/form-data" autocomplete="Off">
+              <div class="input-group">
+                <input type="text" class="field" />
+                <label class="input-label"> What was your goal when you first started with us? </label>
+              </div>
+               <div class="input-group">
+                <input type="text" class="field"  />
+                <label class="input-label">  Did you achieve your goal?</label>
+              </div>
+            
+              <div class="input-group">
+                <input type="text" class="field" id="PhoneNumber" />
+                <label class="input-label"> How did you feel about your workouts with us?</label>
+              </div>
+              <div class="input-group">
+                <input type="text" class="field" id="TimeAvailable" />
+                <label class="input-label">Would you ever come back and work with us?</label>
+              </div>
+              <div class="input-group">
+                <input type="text" class="field" id="Goal" />
+                <label class="input-label">Would you recommend us to a friend?</label>
+              </div>
+              <input type="submit" id="btnRateUS" class="submit-btn" value=Submit />
+             </form>
+          </div>
+        </div>
+      </section>
+
       <footer class="footer" id="footerSection">
         <div class="footer-content">
           <div class="social-list">
@@ -278,7 +315,6 @@ emailjs.init("user_4ybz5wGwQMUNKiQrTGmj6");
 $('#frmContact').on('submit', function(event) {
     event.preventDefault(); // prevent reload
     debugger;
-  //  var data=JSON.stringify(event.target[1].value);
     var formData = new FormData();
 
     formData.append('service_id', 'service_u8ay85r');
@@ -291,14 +327,6 @@ $('#frmContact').on('submit', function(event) {
     formData.append('user_goal', event.target[3].value);
     formData.append('user_health_issues', event.target[4].value);
     
-    
-
-//     var other_data = $('#frmContact').serializeArray();
-// $.each(other_data,function(key,input){
-//     formData.append(input.name,input.value);
-// });
-
- 
     $.ajax('https://api.emailjs.com/api/v1.0/email/send-form', {
         type: 'POST',
         data: formData,
@@ -310,6 +338,36 @@ $('#frmContact').on('submit', function(event) {
         alert('Oops... ' + JSON.stringify(error));
     });
 });
+
+
+$('#frmRateUs').on('submit', function(event) {
+	debugger;
+    event.preventDefault(); // prevent reload
+    debugger;
+    var formData = new FormData();
+
+    formData.append('service_id', 'service_u2uplal');
+    formData.append('template_id', 'template_ub636uq');
+    formData.append('user_id', 'user_4ybz5wGwQMUNKiQrTGmj6');
+
+    formData.append('your_goal', event.target[0].value);
+    formData.append('acheive_goal', event.target[1].value);
+    formData.append('about_workout', event.target[2].value);
+    formData.append('come_back', event.target[3].value);
+    formData.append('would_your_recommend', event.target[4].value);
+    
+    $.ajax('https://api.emailjs.com/api/v1.0/email/send-form', {
+        type: 'POST',
+        data: formData,
+        contentType: false, // auto-detection
+        processData: false // no need to parse formData to string
+    }).done(function() {
+        alert('Thank you for your Feedback !');
+    }).fail(function(error) {
+        alert('Oops... ' + JSON.stringify(error));
+    });
+});
+
 
   </script>
     
